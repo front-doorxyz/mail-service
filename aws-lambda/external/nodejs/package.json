@@ -1,0 +1,28 @@
+{
+    "name": "frontdoor-mailservice",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "aws:layer:build": "copyfiles package.json package-lock.json aws-lambda/external/nodejs && cd aws-lambda/external/nodejs&& npm i",
+        "aws:layer:zip": "cd aws-lambda/external&& 7z a -x!nodejs.zip -tzip nodejs.zip",
+        "aws:layer:publish": "aws lambda publish-layer-version --layer-name external --description 'external' --license-info 'MIT' --zip-file fileb://$PWD/aws-lambda/external/nodejs.zip",
+        "aws:fn": "cd aws-lambda/fn&& 7z a -x!fn.zip -tzip fn.zip&& aws lambda update-function-code --function-name front-door --zip-file fileb://$PWD/fn.zip",
+        "aws:layer": "npm run aws:layer:build&& npm run aws:layer:zip&& npm run aws:layer:publish"
+    },
+    "author": "Pedro Pelicano",
+    "license": "ISC",
+    "dependencies": {
+        "@ensdomains/ensjs": "^2.0.1",
+        "@sendgrid/mail": "^7.6.0",
+        "@truffle/hdwallet-provider": "^1.2.3",
+        "@types/dotenv": "^4.0.3",
+        "axios": "^0.26.0",
+        "body-parser": "^1.19.1",
+        "express": "^4.17.1",
+        "web3-token": "^0.1.32"
+    },
+    "devDependencies": {
+        "copyfiles": "^2.4.1"
+    }
+}
