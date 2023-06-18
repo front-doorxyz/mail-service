@@ -16,5 +16,20 @@ module.exports = {
         catch (err) {
             return err;
         }
+    },
+    sendgridMailHuddle: async (to, roomId) => {
+        const msg = {
+            to: to, // Change to your recipient
+            from: 'pedropelicano@koolabah.com', // Change to your verified sender
+            subject: 'You got an interview from front-door.xyz',
+            text: `Hey Candidate you have a interview for your job with join using huddle room id ${roomId}`,
+            html: `Hey Candidate you have a interview for your job with join using huddle room id <a href="https://goerli.front-door.xyz#${roomId}">${roomId}</a>`,
+        }
+        try {
+            return await sgMail.send(msg)
+        }
+        catch (err) {
+            return err;
+        }
     }
 }
