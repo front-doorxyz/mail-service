@@ -7,7 +7,7 @@
         "aws:profile": "export AWS_PROFILE=default",
         "aws:layer:build": "copyfiles package.json package-lock.json aws-lambda/external/nodejs && cd aws-lambda/external/nodejs&& npm i",
         "aws:layer:zip": "cd aws-lambda/external&& 7z a -x!nodejs.zip -tzip nodejs.zip",
-        "aws:layer:publish": "npm run aws:profile && aws lambda publish-layer-version --layer-name external --description 'external' --license-info 'MIT' --zip-file fileb://$PWD/aws-lambda/external/nodejs.zip",
+        "aws:layer:publish": "npm run aws:profile && aws lambda publish-layer-version --layer-name external --region eu-central-1 --description 'external' --license-info 'MIT' --zip-file fileb://$PWD/aws-lambda/external/nodejs.zip",
         "aws:fn": "cd aws-lambda/fn&& 7z a -x!fn.zip -tzip fn.zip && npm run aws:profile && aws lambda update-function-code --region eu-central-1 --function-name front-door --zip-file fileb://$PWD/fn.zip",
         "aws:layer": "npm run aws:profile && npm run aws:layer:build&& npm run aws:layer:zip&& npm run aws:layer:publish"
     },

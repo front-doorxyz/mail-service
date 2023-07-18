@@ -1,6 +1,5 @@
-const { sendgridMail } = require('services/sendgrid')
+const { sendgridMail, sendgridMailHuddle } = require('services/sendgrid')
 const { oGet, errorCodes } = require('utils');
-const { sendgridMailHuddle } = require('../../services/sendgrid');
 
 exports.handler = async (event) => {
     const reponseHeaders =  {
